@@ -49,6 +49,7 @@ func TestIsFloat(t *testing.T) {
         "  -.8",
         "  -.8   ",
         "-.8   ",
+        "+.8",
     }
     for _, value := range intNumbers {
         assert.True(t, IsNumber(value), fmt.Sprintf("%s should be float", value))
