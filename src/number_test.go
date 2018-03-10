@@ -44,3 +44,12 @@ func TestIsExponentialFunction(t *testing.T) {
         assert.True(t, IsNumber(value), fmt.Sprintf("%s should be number", value))
     }
 }
+
+func TestIsNotNumeric(t *testing.T) {
+    notNumbers := []string {
+        "e9",
+    }
+    for _, value := range notNumbers {
+        assert.False(t, IsNumber(value), fmt.Sprintf("%s is not numeric", value))
+    }
+}
