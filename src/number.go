@@ -10,7 +10,7 @@ func IsNumber(s string) bool {
     if numeric_patterns == nil {
         numeric_patterns = []string{
             "^(-|[0-9])[0-9]*$",
-            "^(-|[0-9]+)?\\.[0-9]+$",
+            "^(((-|[0-9]+)?\\.[0-9]+)|((-|[0-9]+)+\\.[0-9]?))$",
         }
     }
 
