@@ -20,3 +20,15 @@ func TestIsInteger(t *testing.T) {
         assert.True(t, IsNumber(value), fmt.Sprintf("%s should be integer", value))
     }
 }
+
+func TestIsFloat(t *testing.T) {
+    intNumbers := []string{
+        ".1",
+        "0.11",
+        "2.123456",
+        ".0091",
+    }
+    for _, value := range intNumbers {
+        assert.True(t, IsNumber(value), fmt.Sprintf("%s should be float", value))
+    }
+}
