@@ -2,11 +2,13 @@ package number
 
 import (
     "regexp"
+    "strings"
 )
 
 var matchFunc []func(string) (bool, error)
 
 func IsNumber(s string) bool {
+    s = strings.TrimSpace(s)
     if matchFunc == nil {
         matchFunc = []func(string) (bool, error){
             IsInteger,
