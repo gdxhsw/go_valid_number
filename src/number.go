@@ -33,9 +33,15 @@ func IsInteger(s string) (bool, error) {
 }
 
 func IsFloat(s string) (bool, error) {
-    pattern := "^(((-|[0-9]+)?\\.[0-9]+)|((-|[0-9]+)+\\.[0-9]?))$"
+    pattern1 := "^((-|[0-9]+)?\\.[0-9]+)$"
+    pattern2 := "^((-|[0-9]+)+\\.[0-9]?)$"
 
-    return regexp.MatchString(pattern, s)
+    isMatched, err := regexp.MatchString(pattern1, s)
+    if !isMatched {
+        return regexp.MatchString(pattern2, s)
+    }
+
+    return isMatched, err
 }
 
 func IsExponentialFunction(s string) (bool, error) {
