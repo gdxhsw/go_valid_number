@@ -66,6 +66,7 @@ func TestIsExponentialFunction(t *testing.T) {
         "46.e3",
         ".2e81",
         "-.3e6",
+        "1.431352e7",
     }
     for _, value := range intNumbers {
         assert.True(t, IsNumber(value), fmt.Sprintf("%s should be number", value))
