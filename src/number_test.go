@@ -15,6 +15,7 @@ func TestIsInteger(t *testing.T) {
         "-234",
         "999999999",
         "-999999999",
+        "+888",
     }
     for _, value := range intNumbers {
         assert.True(t, IsNumber(value), fmt.Sprintf("%s should be integer", value))
