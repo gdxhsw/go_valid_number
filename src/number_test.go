@@ -75,6 +75,7 @@ func TestIsNotNumeric(t *testing.T) {
         "   e9",
         "   e9   ",
         "e9   ",
+        " -.",
     }
     for _, value := range notNumbers {
         assert.False(t, IsNumber(value), fmt.Sprintf("%s is not numeric", value))
