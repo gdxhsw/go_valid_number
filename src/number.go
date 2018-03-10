@@ -47,7 +47,7 @@ func IsFloat(s string) (bool, error) {
 }
 
 func IsExponentialFunction(s string) (bool, error) {
-    pattern := "^([0-9]+e[0-9]+)$"
+    pattern := "^((([0-9]+\\.?)|(\\.[0-9]+))e[0-9]+)$"
 
     return regexp.MatchString(pattern, s)
 }

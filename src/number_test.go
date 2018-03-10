@@ -63,6 +63,8 @@ func TestIsExponentialFunction(t *testing.T) {
         "   2e0   ",
         "2e0   ",
         "3e100",
+        "46.e3",
+        ".2e81",
     }
     for _, value := range intNumbers {
         assert.True(t, IsNumber(value), fmt.Sprintf("%s should be number", value))
@@ -76,6 +78,7 @@ func TestIsNotNumeric(t *testing.T) {
         "   e9   ",
         "e9   ",
         " -.",
+        ".e1",
     }
     for _, value := range notNumbers {
         assert.False(t, IsNumber(value), fmt.Sprintf("%s is not numeric", value))
