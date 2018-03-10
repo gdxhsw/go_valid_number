@@ -34,3 +34,13 @@ func TestIsFloat(t *testing.T) {
         assert.True(t, IsNumber(value), fmt.Sprintf("%s should be float", value))
     }
 }
+
+func TestIsExponentialFunction(t *testing.T) {
+    intNumbers := []string{
+        "2e0",
+        "3e100",
+    }
+    for _, value := range intNumbers {
+        assert.True(t, IsNumber(value), fmt.Sprintf("%s should be number", value))
+    }
+}
