@@ -5,12 +5,12 @@ import (
     "strings"
 )
 
-var matchFunc []func(string) (bool, error)
+var matchFunc []func(string) bool
 
 func IsNumber(s string) bool {
     s = strings.TrimSpace(s)
     if matchFunc == nil {
-        matchFunc = []func(string) (bool, error){
+        matchFunc = []func(string) bool {
             IsInteger,
             IsFloat,
             IsExponentialFunction,
@@ -18,7 +18,7 @@ func IsNumber(s string) bool {
     }
 
     for _, f := range matchFunc {
-        is_matched, _ := f(s)
+        is_matched := f(s)
 
         if is_matched {
             return true
@@ -28,26 +28,46 @@ func IsNumber(s string) bool {
     return false
 }
 
-func IsInteger(s string) (bool, error) {
-    pattern := "^(-|\\+|[0-9])[0-9]*$"
+var matchInteger *regexp.Regexp
 
-    return regexp.MatchString(pattern, s)
-}
-
-func IsFloat(s string) (bool, error) {
-    pattern1 := "^((-|\\+)|[0-9]+)?\\.[0-9]+$"
-    pattern2 := "^(-|\\+)?[0-9]+\\.[0-9]*$"
-
-    isMatched, err := regexp.MatchString(pattern1, s)
-    if !isMatched {
-        return regexp.MatchString(pattern2, s)
+func IsInteger(s string) bool {
+    if matchInteger == nil {
+        pattern := "^(-|\\+|[0-9])[0-9]*$"
+        matchInteger, _ = regexp.Compile(pattern)
     }
 
-    return isMatched, err
+    return matchInteger.MatchString(s)
 }
 
-func IsExponentialFunction(s string) (bool, error) {
-    pattern := "^(-|\\+)?((([0-9]+\\.?)|([0-9]*\\.[0-9]+))e(-|\\+)?[0-9]+)$"
+var matchFloat1 *regexp.Regexp
+var matchFloat2 *regexp.Regexp
 
-    return regexp.MatchString(pattern, s)
+func IsFloat(s string) bool {
+    if matchFloat1 == nil {
+        pattern1 := "^((-|\\+)|[0-9]+)?\\.[0-9]+$"
+        matchFloat1, _ = regexp.Compile(pattern1)
+    }
+
+    if matchFloat2 == nil {
+        pattern2 := "^(-|\\+)?[0-9]+\\.[0-9]*$"
+        matchFloat2, _ = regexp.Compile(pattern2)
+    }
+
+    isMatched := matchFloat1.MatchString(s)
+    if !isMatched {
+        return matchFloat2.MatchString(s)
+    }
+
+    return isMatched
+}
+
+var matchExponentialFunction *regexp.Regexp
+
+func IsExponentialFunction(s string) bool {
+    if matchExponentialFunction == nil {
+        pattern := "^(-|\\+)?((([0-9]+\\.?)|([0-9]*\\.[0-9]+))e(-|\\+)?[0-9]+)$"
+        matchExponentialFunction, _ = regexp.Compile(pattern)
+    }
+
+    return matchExponentialFunction.MatchString(s)
 }
